@@ -1,0 +1,1 @@
+/usr/bin/find /archive/ -type f -mtime +180 -exec rm -rf {} +
