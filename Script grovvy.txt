@@ -25,3 +25,15 @@ users.each { user ->
     
     println "-----------------------------"
 }
+
+
+
+import jenkins.model.Jenkins
+
+def jenkinsInstance = Jenkins.getInstance()
+
+if (jenkinsInstance != null) {
+    println "Jenkins instance loaded successfully."
+} else {
+    println "Failed to load Jenkins instance."
+}
