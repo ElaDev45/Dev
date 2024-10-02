@@ -1,0 +1,27 @@
+import hudson.model.User
+import jenkins.security.SecurityRealm
+
+// Dapatkan semua pengguna di Jenkins
+def users = User.getAll()
+
+// Loop melalui semua pengguna dan tampilkan grup mereka
+users.each { user ->
+    println "User: ${user.getId()}"
+    
+    // Dapatkan informasi otentikasi pengguna
+    def details = user.getProperty(jenkins.security.LastGrantedAuthoritiesProperty)
+    
+    // Jika pengguna memiliki detail grup
+    if (details != null) {
+        def groups = details.getAuthorities()
+        if (!groups.isEmpty()) {
+            println "Groups: ${groups.join(', ')}"
+        } else {
+            println "Groups: No groups"
+        }
+    } else {
+        println "Groups: No group information available"
+    }
+    
+    println "-----------------------------"
+}
