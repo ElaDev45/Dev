@@ -37,3 +37,40 @@ if (jenkinsInstance != null) {
 } else {
     println "Failed to load Jenkins instance."
 }
+
+
+
+import hudson.model.User
+import jenkins.model.Jenkins
+
+// Mendapatkan instance Jenkins
+def jenkinsInstance = Jenkins.instance
+
+// Memeriksa apakah securityRealm telah diatur
+def securityRealm = jenkinsInstance.getSecurityRealm()
+
+if (securityRealm != null) {
+    // Mendapatkan semua pengguna yang terdaftar di Jenkins
+    def users = User.getAll()
+
+    users.each { user ->
+        println "User: ${user.getId()}"
+
+        try {
+            // Mendapatkan grup pengguna dari securityRealm
+            def authorities = securityRealm.loadUserByUsername(user.getId())?.authorities
+            if (authorities) {
+                def groups = authorities.collect { it.authority }
+                println "Groups: ${groups.join(', ')}"
+            } else {
+                println "Groups: No groups found"
+            }
+        } catch (Exception e) {
+            println "Error retrieving groups for user ${user.getId()}: ${e.message}"
+        }
+
+        println "-----------------------------"
+    }
+} else {
+    println "Security realm is not configured."
+}
