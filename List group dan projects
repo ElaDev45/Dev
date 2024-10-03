@@ -1,0 +1,73 @@
+import requests
+
+# Replace with your GitLab information
+gitlab_url = "https://gitlab.com"  # GitLab URL
+private_token = "your_private_token"  # Your GitLab private token
+
+def get_groups():
+    headers = {"PRIVATE-TOKEN": private_token}
+    groups = []
+    page = 1
+
+    while True:
+        url = f"{gitlab_url}/api/v4/groups?per_page=100&page={page}"
+        response = requests.get(url, headers=headers)
+
+        if response.status_code == 200:
+            group_data = response.json()
+            if not group_data:
+                break  # Stop if no more groups are found
+            groups.extend(group_data)
+            page += 1
+        else:
+            print("Failed to retrieve groups")
+            break
+
+    return groups
+
+def get_projects(group_id=None):
+    headers = {"PRIVATE-TOKEN": private_token}
+    projects = []
+    page = 1
+
+    while True:
+        url = f"{gitlab_url}/api/v4/projects?per_page=100&page={page}"
+        if group_id:
+            url = f"{gitlab_url}/api/v4/groups/{group_id}/projects?per_page=100&page={page}"
+        response = requests.get(url, headers=headers)
+
+        if response.status_code == 200:
+            project_data = response.json()
+            if not project_data:
+                break  # Stop if no more projects are found
+            projects.extend(project_data)
+            page += 1
+        else:
+            print(f"Failed to retrieve projects for group {group_id}")
+            break
+
+    return projects
+
+def list_groups_and_projects():
+    groups = get_groups()
+    for group in groups:
+        group_id = group['id']
+        group_name = group['name']
+        print(f"Group: {group_name}")
+        
+        # Get projects for each group
+        projects = get_projects(group_id)
+        if projects:
+            for project in projects:
+                print(f"    Project: {project['name']}")
+        else:
+            print("    No projects found in this group.")
+
+    # List projects without groups (global level projects)
+    global_projects = get_projects()
+    print("Global Projects (not in any group):")
+    for project in global_projects:
+        print(f"    Project: {project['name']}")
+
+# Run the script
+list_groups_and_projects()
