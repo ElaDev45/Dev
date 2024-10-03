@@ -1,0 +1,46 @@
+import requests
+
+# Replace with your GitLab information
+gitlab_url = "https://gitlab.com"  # Your GitLab URL
+private_token = "your_private_token"  # Your GitLab private token
+
+def get_projects():
+    headers = {
+        "PRIVATE-TOKEN": private_token
+    }
+    url = f"{gitlab_url}/api/v4/projects?membership=true&simple=true&per_page=100"
+    response = requests.get(url, headers=headers)
+    
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print("Failed to retrieve projects")
+        return []
+
+def get_last_commit(project_id):
+    headers = {
+        "PRIVATE-TOKEN": private_token
+    }
+    url = f"{gitlab_url}/api/v4/projects/{project_id}/repository/commits?per_page=1"
+    response = requests.get(url, headers=headers)
+    
+    if response.status_code == 200 and response.json():
+        commit = response.json()[0]
+        return commit['author_name'], commit['created_at']
+    else:
+        print(f"Failed to retrieve commits for project {project_id}")
+        return None, None
+
+def list_projects_and_commits():
+    projects = get_projects()
+    for project in projects:
+        project_id = project['id']
+        project_name = project['name']
+        author_name, last_commit_time = get_last_commit(project_id)
+        if author_name and last_commit_time:
+            print(f"Project: {project_name} - Last commit by {author_name} on {last_commit_time}")
+        else:
+            print(f"Project: {project_name} - No commits found")
+
+# Run the script
+list_projects_and_commits()
