@@ -1,3 +1,5 @@
 for (agent in Jenkins.instance.nodes) {
-  println("${agent.displayName}: ${agent.getComputer().getChannel().getProperty(hudson.remoting.RemoteCapability.class)}")
+  if (agent.getComputer()?.isOnline()) {
+    println("${agent.displayName}: ${agent.getComputer().getChannel().getProperty(hudson.remoting.RemoteCapability.class)}")
+  }
 }
