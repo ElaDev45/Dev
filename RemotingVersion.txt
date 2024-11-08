@@ -1,0 +1,3 @@
+for (agent in Jenkins.instance.nodes) {
+  println("${agent.displayName}: ${agent.getComputer().getChannel().getProperty(hudson.remoting.RemoteCapability.class)}")
+}
