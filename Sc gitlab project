@@ -1,0 +1,65 @@
+import requests
+
+# Konfigurasi
+GITLAB_URL = "https://gitlab.example.com"  # Ganti dengan URL GitLab Anda
+ACCESS_TOKEN = "your_personal_access_token"  # Ganti dengan token akses pribadi Anda
+
+def get_projects():
+    """Mengambil daftar proyek dari GitLab."""
+    projects = []
+    url = f"{GITLAB_URL}/api/v4/projects"
+    headers = {"Private-Token": ACCESS_TOKEN}
+    params = {"per_page": 100, "page": 1}
+
+    while url:
+        response = requests.get(url, headers=headers, params=params)
+        if response.status_code == 200:
+            projects.extend(response.json())
+            # Dapatkan URL halaman berikutnya dari header
+            url = response.links.get("next", {}).get("url")
+        else:
+            print(f"Error: {response.status_code}, {response.text}")
+            break
+
+    return projects
+
+
+def get_project_members(project_id):
+    """Mengambil daftar anggota proyek tertentu."""
+    members = []
+    url = f"{GITLAB_URL}/api/v4/projects/{project_id}/members/all"
+    headers = {"Private-Token": ACCESS_TOKEN}
+    params = {"per_page": 100, "page": 1}
+
+    while url:
+        response = requests.get(url, headers=headers, params=params)
+        if response.status_code == 200:
+            members.extend(response.json())
+            # Dapatkan URL halaman berikutnya dari header
+            url = response.links.get("next", {}).get("url")
+        else:
+            print(f"Error: {response.status_code}, {response.text}")
+            break
+
+    return members
+
+
+def main():
+    """Fungsi utama untuk mengumpulkan proyek dan anggota."""
+    print("Mengambil daftar proyek...")
+    projects = get_projects()
+
+    if not projects:
+        print("Tidak ada proyek yang ditemukan.")
+        return
+
+    print(f"Ditemukan {len(projects)} proyek. Mengambil anggota...")
+
+    for project in projects:
+        print(f"Proyek: {project['name']} ({project['id']})")
+        members = get_project_members(project['id'])
+        for member in members:
+            print(f"  - Anggota: {member['username']} ({member['access_level']})")
+
+if __name__ == "__main__":
+    main()
