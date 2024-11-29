@@ -1,1 +1,4 @@
 /usr/bin/find /archive/ -type f -mtime +180 -exec rm -rf {} +
+
+
+jq -r '.[] | .project_name as $proj | .members[] | [$proj, .name, .username, .access_level] | @tsv' projects_and_members.json
