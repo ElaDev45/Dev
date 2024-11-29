@@ -1,0 +1,57 @@
+import gitlab
+
+# Konfigurasi GitLab
+GITLAB_URL = "https://gitlab.example.com"  # Ganti dengan URL GitLab Anda
+PRIVATE_TOKEN = "your_private_token"       # Ganti dengan token akses pribadi Anda
+
+# Koneksi ke GitLab
+gl = gitlab.Gitlab(GITLAB_URL, private_token=PRIVATE_TOKEN)
+
+def collect_projects_and_members():
+    """
+    Mengumpulkan daftar proyek GitLab beserta anggota mereka.
+    """
+    try:
+        projects = gl.projects.list(all=True)
+        result = []
+
+        print("Mengumpulkan proyek dan anggota...\n")
+
+        for project in projects:
+            project_id = project.id
+            project_name = project.name_with_namespace
+
+            # Dapatkan anggota proyek
+            members = project.members.list(all=True)
+            member_list = [
+                {"name": member.name, "username": member.username, "access_level": member.access_level}
+                for member in members
+            ]
+
+            result.append({
+                "project_id": project_id,
+                "project_name": project_name,
+                "members": member_list
+            })
+
+            print(f"Proyek: {project_name}, Jumlah Anggota: {len(member_list)}")
+
+        return result
+
+    except gitlab.exceptions.GitlabError as e:
+        print(f"Error saat mengakses API GitLab: {e}")
+        return []
+
+def main():
+    # Panggil fungsi untuk mengumpulkan data
+    data = collect_projects_and_members()
+
+    # Simpan data ke file (opsional)
+    with open("projects_and_members.json", "w") as f:
+        import json
+        json.dump(data, f, indent=4)
+
+    print("\nData proyek dan anggota telah disimpan ke 'projects_and_members.json'.")
+
+if __name__ == "__main__":
+    main()
