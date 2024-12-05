@@ -1,0 +1,43 @@
+import jenkins.model.*
+import hudson.security.*
+import org.jenkinsci.plugins.*
+
+import jenkins.model.IdStrategy
+
+// Parameter LDAP
+String server = "ldaps://pwpadsdut208.ocbncisp.com:636"
+String rootDN = "ou=Lokasi User,dc=ocbncisp,dc=com"
+String userSearchBase = ""
+String userSearch = "sAMAccountName={0}"
+String groupSearchBase = ""
+String groupSearchFilter = "(member={0})" // Tambahkan filter di sini
+String managerDN = "cn=user devops,ou=Others,ou=Special Purpose,ou=Lokasi User,dc=ocbncisp,dc=com"
+String managerPassword = "@siaAfrika100"
+boolean inhibitInferRootDN = false
+
+// Strategi pencocokan ID (default: CASE_INSENSITIVE)
+IdStrategy userIdStrategy = IdStrategy.CASE_INSENSITIVE
+IdStrategy groupIdStrategy = IdStrategy.CASE_INSENSITIVE
+
+// Strategi keanggotaan grup (gunakan default)
+LDAPGroupMembershipStrategy groupMembershipStrategy = new FromGroupSearchLDAPGroupMembershipStrategy(groupSearchFilter)
+
+// Konfigurasi LDAP
+SecurityRealm ldap_realm = new LDAPSecurityRealm(
+    server, 
+    rootDN, 
+    userSearchBase, 
+    userSearch, 
+    inhibitInferRootDN, 
+    groupSearchBase, 
+    groupSearchFilter, 
+    groupMembershipStrategy, 
+    managerDN, 
+    managerPassword, 
+    userIdStrategy, 
+    groupIdStrategy
+)
+
+// Set konfigurasi security pada Jenkins
+Jenkins.instance.setSecurityRealm(ldap_realm)
+Jenkins.instance.save()
