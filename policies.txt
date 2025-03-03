@@ -1,0 +1,89 @@
+Policy|Severity|Lifecycle|Status
+OpenShift: Central Admin Secret Accessed|MEDIUM|RUNTIME|Enabled
+Pod Service Account Token Automatically Mounted|MEDIUM|DEPLOY|Enabled
+Docker CIS 5.15: Ensure that the host's process namespace is not shared|MEDIUM|DEPLOY|Enabled
+Unauthorized Process Execution|HIGH|RUNTIME|Enabled
+Alpine Linux Package Manager (apk) in Image|LOW|BUILD,DEPLOY|Enabled
+ADD Command used instead of COPY|LOW|BUILD,DEPLOY|Disabled
+Ubuntu Package Manager in Image|LOW|BUILD,DEPLOY|Enabled
+ocbc-dotnet-runtime-21|MEDIUM|DEPLOY|Enabled
+CAP_SYS_ADMIN capability added|MEDIUM|DEPLOY|Enabled
+Curl in Image|LOW|BUILD,DEPLOY|Disabled
+Fixable CVSS >= 6 and Privileged|HIGH|DEPLOY|Disabled
+Deployments should have at least one ingress Network Policy|MEDIUM|DEPLOY|Disabled
+Secure Shell (ssh) Port Exposed|HIGH|DEPLOY|Enabled
+Red Hat Package Manager in Image|LOW|BUILD,DEPLOY|Enabled
+Red Hat Package Manager Execution|LOW|RUNTIME|Enabled
+ON - Curl in Image|LOW|RUNTIME|Enabled
+Mount Container Runtime Socket|MEDIUM|DEPLOY|Enabled
+Required Annotation: Email|LOW|DEPLOY|Disabled
+Linux User Add Execution|HIGH|RUNTIME|Enabled
+Alpine Linux Package Manager Execution|LOW|RUNTIME|Enabled
+Ubuntu Package Manager Execution|LOW|RUNTIME|Enabled
+chkconfig Execution|LOW|RUNTIME|Enabled
+crontab Execution|MEDIUM|RUNTIME|Enabled
+Compiler Tool Execution|LOW|RUNTIME|Enabled
+Netcat Execution Detected|MEDIUM|RUNTIME|Enabled
+Cryptocurrency Mining Process Execution|HIGH|RUNTIME|Enabled
+Network Management Execution|HIGH|RUNTIME|Enabled
+nmap Execution|HIGH|RUNTIME|Enabled
+Shell Spawned by Java Application|HIGH|RUNTIME|Enabled
+systemd Execution|LOW|RUNTIME|Enabled
+systemctl Execution|LOW|RUNTIME|Enabled
+Deployments with externally exposed endpoints|MEDIUM|DEPLOY|Disabled
+OpenShift: Kubernetes Secret Accessed by an Impersonated User|MEDIUM|RUNTIME|Enabled
+Process Targeting Kubernetes Service Endpoint|HIGH|RUNTIME|Enabled
+Secure Shell Server (sshd) Execution|HIGH|RUNTIME|Enabled
+Remote File Copy Binary Execution|MEDIUM|RUNTIME|Enabled
+Docker CIS 4.4: Ensure images are scanned and rebuilt to include security patches|MEDIUM|BUILD|Disabled
+Docker CIS 5.16: Ensure that the host's IPC namespace is not shared|MEDIUM|DEPLOY|Enabled
+90-Day Image Age|LOW|BUILD,DEPLOY|Enabled
+Docker CIS 5.9 and 5.20: Ensure that the host's network namespace is not shared|MEDIUM|DEPLOY|Enabled
+Insecure specified in CMD|LOW|BUILD,DEPLOY|Enabled
+Kubernetes Dashboard Deployed|LOW|DEPLOY|Enabled
+Latest tag|LOW|BUILD,DEPLOY|Enabled
+Docker CIS 5.19: Ensure mount propagation mode is not enabled|MEDIUM|DEPLOY|Enabled
+Unauthorized Network Flow|HIGH|RUNTIME|Enabled
+Docker CIS 5.1 Ensure that, if applicable, an AppArmor Profile is enabled|MEDIUM|DEPLOY|Enabled
+Images with no scans|MEDIUM|DEPLOY|Disabled
+Docker CIS 5.21: Ensure the default seccomp profile is not disabled|MEDIUM|DEPLOY|Disabled
+Required Annotation: Owner/Team|LOW|DEPLOY|Disabled
+Required Label: Owner/Team|LOW|DEPLOY|Disabled
+Password Binaries|HIGH|RUNTIME|Disabled
+Container with privilege escalation allowed|MEDIUM|DEPLOY|Enabled
+Required Image Label|LOW|BUILD,DEPLOY|Disabled
+SetUID Processes|HIGH|RUNTIME|Disabled
+Container using read-write root filesystem|MEDIUM|DEPLOY|Enabled
+Privileged Container|MEDIUM|DEPLOY|Enabled
+Kubernetes Actions: Port Forward to Pod|HIGH|RUNTIME|Enabled
+Docker CIS 4.1: Ensure That a User for the Container Has Been Created|LOW|BUILD,DEPLOY|Enabled
+Improper Usage of Orchestrator Secrets Volume|LOW|DEPLOY|Enabled
+30-Day Scan Age|MEDIUM|DEPLOY|Enabled
+Mounting Sensitive Host Directories|MEDIUM|DEPLOY|Enabled
+Environment Variable Contains Secret|HIGH|DEPLOY|Enabled
+Shell Management|LOW|RUNTIME|Disabled
+Docker CIS 4.7: Alert on Update Instruction|LOW|BUILD,DEPLOY|Enabled
+Wget in Image|LOW|BUILD,DEPLOY|Disabled
+Apache Struts: CVE-2017-5638|CRITICAL|BUILD,DEPLOY|Enabled
+Fixable Severity at least Important|HIGH|BUILD,DEPLOY|Enabled
+Iptables or nftables Executed in Privileged Container|CRITICAL|RUNTIME|Enabled
+Login Binaries|HIGH|RUNTIME|Enabled
+Secret Mounted as Environment Variable|HIGH|DEPLOY|Enabled
+Shadow File Modification|HIGH|RUNTIME|Enabled
+Fixable CVSS >= 7|HIGH|BUILD,DEPLOY|Enabled
+Log4Shell: log4j Remote Code Execution vulnerability|CRITICAL|BUILD,DEPLOY|Enabled
+Emergency Deployment Annotation|HIGH|DEPLOY|Enabled
+Linux Group Add Execution|HIGH|RUNTIME|Enabled
+iptables Execution|HIGH|RUNTIME|Enabled
+Kubernetes Actions: Exec into Pod|HIGH|RUNTIME|Enabled
+OpenShift: Kubeadmin Secret Accessed|HIGH|RUNTIME|Enabled
+Process Targeting Cluster Kubelet Endpoint|HIGH|RUNTIME|Enabled
+Process Targeting Cluster Kubernetes Docker Stats Endpoint|HIGH|RUNTIME|Enabled
+Privileged Containers with Important and Critical Fixable CVEs|HIGH|DEPLOY|Enabled
+Secure Shell (ssh) Port Exposed in Image|HIGH|BUILD,DEPLOY|Enabled
+Spring4Shell (Spring Framework Remote Code Execution) and Spring Cloud Function vulnerabilities|CRITICAL|BUILD,DEPLOY|Enabled
+Process with UID 0|HIGH|RUNTIME|Enabled
+Docker CIS 5.7: Ensure privileged ports are not mapped within containers|MEDIUM|DEPLOY|Enabled
+Drop All Capabilities|LOW|DEPLOY|Disabled
+Rapid Reset: Denial of Service Vulnerability in HTTP/2 Protocol|CRITICAL|BUILD,DEPLOY|Enabled
+No CPU request or memory limit specified|MEDIUM|DEPLOY|Enabled
